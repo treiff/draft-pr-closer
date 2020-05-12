@@ -1,0 +1,15 @@
+name: 'Draft PR Closer'
+description: 'Automatically close draft PRs after a period of time'
+inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+    required: true
+  days-before-stale:
+    description: 'Number of days before marked stale'
+    required: true
+  days-before-close:
+    description: 'Number of days before closed'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

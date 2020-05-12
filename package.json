@@ -1,0 +1,27 @@
+{
+  "name": "draft-pr-closer",
+  "version": "0.0.1",
+  "main": "lib/main.js",
+  "repository": "git@github.com:treiff/draft-pr-closer.git",
+  "author": "Trevor Reiff <trevorreiff@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write **/*.ts",
+    "format-check": "prettier --check **/*.ts",
+    "pack": "ncc build",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.1",
+    "jest": "^26.0.1",
+    "jest-circus": "^26.0.1",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^2.2.0"
+  }
+}
