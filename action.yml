@@ -1,5 +1,7 @@
 name: 'Draft PR Closer'
 description: 'Automatically close draft PRs after a period of time'
+icon: x
+color: red
 inputs:
   repo-token:
     description: 'The GITHUB_TOKEN secret'
