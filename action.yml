@@ -10,6 +10,8 @@ inputs:
   days-before-close:
     description: 'Number of days before closed'
     required: true
+  closing-comment:
+    description: 'Comment to add to PR when closing'
 runs:
   using: 'node12'
   main: 'dist/index.js'

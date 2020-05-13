@@ -5,6 +5,7 @@ import * as Webhooks from '@octokit/webhooks';
 async function run(): Promise<void> {
   try {
     const token = core.getInput('repo-token', { required: true });
+    const closingComment = core.getInput('closing-comment');
     const client = new github.GitHub(token);
 
     const draftPrs = await getDraftPrs(client);
@@ -12,7 +13,7 @@ async function run(): Promise<void> {
     if (draftPrs.length) {
       for (let pr of draftPrs) {
         if (shouldClose(pr)) {
-          closePr(pr, client);
+          closePr(pr, client, closingComment);
         }
       }
     }
@@ -32,10 +33,20 @@ function shouldClose(pr: Webhooks.WebhookPayloadPullRequestPullRequest): boolean
 
 async function closePr(
   pr: Webhooks.WebhookPayloadPullRequestPullRequest,
-  client: github.GitHub
+  client: github.GitHub,
+  closingComment: string | undefined
 ): Promise<void> {
-  core.debug(`Closing PR #${pr.number} - ${pr.title} for being stale`);
+  if (closingComment) {
+    const response = await client.issues.createComment({
+      owner: github.context.repo.owner,
+      repo: github.context.repo.repo,
+      issue_number: pr.number,
+      body: closingComment,
+    });
+    core.debug(`created comment URL: ${response.data.html_url}`);
+  }
 
+  core.debug(`Closing PR #${pr.number} - ${pr.title} for being stale`);
   await client.pulls.update({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
