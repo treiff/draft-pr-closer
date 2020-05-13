@@ -39,7 +39,7 @@ jobs:
     name: Draft PR Closer
     steps:
       - name: Get PR Status
-        uses: treiff/draft-pr-closer@v1
+        uses: treiff/draft-pr-closer@v0.2-alpha
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           days-before-close: 2
