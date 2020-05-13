@@ -1,6 +1,7 @@
 # Close old draft PRs
 
-Closes draft PRs that have had no activity for a specified amount of time.
+Closes draft PRs that have had no activity for a specified amount of time. Can also leave an optional
+`closing-comment` if you'd like.
 
 ### Building and testing
 
@@ -37,13 +38,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Draft PR Closer
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
       - name: Get PR Status
         uses: treiff/draft-pr-closer@v1
         with:
           repo-token: '${{ secrets.GITHUB_TOKEN }}'
           days-before-close: 2
+          closing-comment: 'Looks like this has been around a while, going to close'
 ```
 
 ### Debugging
