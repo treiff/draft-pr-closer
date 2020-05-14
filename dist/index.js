@@ -2046,7 +2046,7 @@ function shouldClose(pr) {
     const daysUntilExpiration = core.getInput('days-before-close', { required: true });
     const daysInMillis = 1000 * 60 * 60 * 24 * daysUntilExpiration;
     const millisSinceLastUpdated = new Date().getTime() - new Date(pr.updated_at).getTime();
-    return millisSinceLastUpdated < daysInMillis;
+    return millisSinceLastUpdated > daysInMillis;
 }
 function closePr(pr, client, closingComment) {
     return __awaiter(this, void 0, void 0, function* () {
