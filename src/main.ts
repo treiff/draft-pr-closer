@@ -28,7 +28,7 @@ function shouldClose(pr: Webhooks.WebhookPayloadPullRequestPullRequest): boolean
   const daysInMillis = 1000 * 60 * 60 * 24 * daysUntilExpiration;
   const millisSinceLastUpdated = new Date().getTime() - new Date(pr.updated_at).getTime();
 
-  return millisSinceLastUpdated < daysInMillis;
+  return millisSinceLastUpdated > daysInMillis;
 }
 
 async function closePr(
